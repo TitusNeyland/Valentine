@@ -442,6 +442,195 @@
                 opacity: 0;
             }
         }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+
+            .content {
+                padding: 40px 25px;
+                margin: 20px;
+                max-width: 100%;
+                border-radius: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+
+            .title-line1 {
+                font-size: 0.7em;
+            }
+
+            .title-line2 {
+                font-size: 0.9em;
+            }
+
+            .name {
+                font-size: 2.5em;
+                margin: 20px 0;
+            }
+
+            .question {
+                font-size: 1em;
+                margin: 25px 0;
+                line-height: 1.6;
+            }
+
+            .buttons {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 30px;
+            }
+
+            button {
+                padding: 14px 35px;
+                font-size: 1em;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .ps-note {
+                font-size: 0.85em;
+                margin-top: 25px;
+            }
+
+            .celebration-gif {
+                max-width: 250px;
+                margin: 15px auto;
+            }
+
+            /* Reduce floating hearts on mobile */
+            .floating-heart {
+                font-size: 20px;
+                opacity: 0.5;
+            }
+
+            .heart1, .heart2, .heart3, .heart4, .heart5,
+            .heart6, .heart7, .heart8, .heart9, .heart10 {
+                font-size: 18px;
+            }
+
+            /* Adjust celebration content for mobile */
+            .content.fade-in h1 {
+                font-size: 2em !important;
+            }
+
+            .content.fade-in .name {
+                font-size: 2.5em !important;
+                margin: 20px 0 !important;
+            }
+
+            .content.fade-in .question {
+                font-size: 1.1em !important;
+                margin: 25px 0 !important;
+            }
+
+            .content.fade-in .celebration-gif {
+                max-width: 250px !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+
+            .content {
+                padding: 30px 20px;
+                margin: 10px;
+                border-radius: 15px;
+            }
+
+            h1 {
+                font-size: 1.7em;
+                margin-bottom: 12px;
+            }
+
+            .title-line1 {
+                font-size: 0.65em;
+            }
+
+            .title-line2 {
+                font-size: 0.85em;
+            }
+
+            .name {
+                font-size: 2.2em;
+                margin: 15px 0;
+            }
+
+            .question {
+                font-size: 0.95em;
+                margin: 20px 0;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 0.95em;
+            }
+
+            .celebration-gif {
+                max-width: 200px;
+            }
+
+            .ps-note {
+                font-size: 0.8em;
+            }
+
+            /* Hide some floating hearts on very small screens */
+            .heart5, .heart6, .heart7, .heart8, .heart9, .heart10 {
+                display: none;
+            }
+
+            .floating-heart {
+                font-size: 18px;
+            }
+
+            /* Adjust celebration content for very small screens */
+            .content.fade-in h1 {
+                font-size: 1.7em !important;
+            }
+
+            .content.fade-in .name {
+                font-size: 2.2em !important;
+                margin: 15px 0 !important;
+            }
+
+            .content.fade-in .question {
+                font-size: 1em !important;
+                margin: 20px 0 !important;
+            }
+
+            .content.fade-in .celebration-gif {
+                max-width: 200px !important;
+            }
+        }
+
+        /* Landscape mobile adjustments */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .content {
+                padding: 30px 25px;
+                max-width: 90%;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .name {
+                font-size: 2.2em;
+                margin: 15px 0;
+            }
+
+            .question {
+                font-size: 0.95em;
+                margin: 20px 0;
+            }
+        }
     </style>
 </head>
 <body>
