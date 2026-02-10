@@ -185,8 +185,8 @@
         .no-btn {
             background: #e0e0e0;
             color: #999;
-            cursor: not-allowed;
-            opacity: 0.6;
+            cursor: pointer;
+            opacity: 0.9;
             position: relative;
             transition: all 0.4s ease;
         }
@@ -205,6 +205,75 @@
 
         .no-btn:hover::after {
             opacity: 1;
+        }
+
+        /* No overlay for "No" response */
+        .no-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .no-overlay.visible {
+            pointer-events: auto;
+            animation: noOverlayIn 0.3s ease-out forwards;
+        }
+
+        .no-overlay.fade-out {
+            animation: noOverlayOut 0.4s ease-in forwards;
+        }
+
+        .no-modal {
+            max-width: 320px;
+            width: 90%;
+            border-radius: 18px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            transform: scale(0.95);
+        }
+
+        .no-modal img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .no-modal-caption {
+            padding: 12px 16px 16px;
+            text-align: center;
+            color: #ffebee;
+            font-size: 0.95em;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+        }
+
+        @keyframes noOverlayIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes noOverlayOut {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.9);
+            }
         }
 
         .floating-heart {
@@ -652,14 +721,14 @@
             <span class="title-line1">Will You Be My</span>
             <span class="title-line2">Valentine?</span>
         </h1>
-        <div class="name">Maya</div>
+        <div class="name">Nemo</div>
         <div class="question">
             I've been thinking about this a lot lately, and there's something I wanted to ask you.<br><br>
             Would you do me the honor of being my Valentine 👉🏾👈🏾?
         </div>
         <div class="buttons">
             <button class="yes-btn" onclick="handleYes()">Yes! 💕</button>
-            <button class="no-btn" disabled>No</button>
+            <button class="no-btn" onclick="handleNo()">No</button>
         </div>
         <div class="ps-note">P.S. You do not have a choice.</div>
     </div>
@@ -841,7 +910,7 @@
                         <span class="title-line2" style="display: block; font-size: 0.9em; margin-top: 5px;">You just made my day ❤️</span>
                     </h1>
                     <div class="name" style="opacity: 0; animation: fadeInText 0.6s ease-out 0.4s forwards; color: #ff6b9d; font-size: 3.2em; margin: 30px 0; font-weight: 600; font-family: 'Dancing Script', cursive; position: relative; display: inline-block;">
-                        Maya
+                        Nemo
                     </div>
                     <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWtmeXl2ejVnZzh5ODc1MWtmN25veDFzMzY2Zmg2bmJyZnRoNXJheSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/9zzUYFVSrpKRaZuW5A/giphy.gif" alt="Celebration" class="celebration-gif" />
                     <div class="question" style="opacity: 0; animation: fadeInText 0.6s ease-out 0.6s forwards; color: #ff5a7d; font-size: 1.4em; margin: 35px 0; line-height: 1.7; font-weight: 500;">
@@ -860,8 +929,41 @@
             }, 400);
         }
 
-        // Make function globally accessible
+        // Handle No button click
+        function handleNo(event) {
+            if (event) event.preventDefault();
+
+            // If an overlay already exists, don't create another
+            if (document.querySelector('.no-overlay')) return;
+
+            const overlay = document.createElement('div');
+            overlay.className = 'no-overlay';
+            overlay.innerHTML = `
+                <div class="no-modal">
+                    <img src="https://media1.tenor.com/m/iAvhvUfV1qAAAAAd/denzel.gif" alt="Think again" />
+                    <div class="no-modal-caption">Wrong answer.</div>
+                </div>
+            `;
+
+            document.body.appendChild(overlay);
+
+            // Trigger fade in
+            requestAnimationFrame(() => {
+                overlay.classList.add('visible');
+            });
+
+            // After 2 seconds, fade out and remove
+            setTimeout(() => {
+                overlay.classList.add('fade-out');
+                setTimeout(() => {
+                    overlay.remove();
+                }, 400);
+            }, 2000);
+        }
+
+        // Make functions globally accessible
         window.handleYes = handleYes;
+        window.handleNo = handleNo;
 
         // Easter egg: click on title
         document.addEventListener('DOMContentLoaded', () => {
